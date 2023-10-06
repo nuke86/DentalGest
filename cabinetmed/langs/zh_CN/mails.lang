@@ -1,0 +1,5 @@
+# Dolibarr language file - en_US - mails
+CHARSET=UTF-8
+MailingModuleDescContactCompanies=第三方/患者的联络人（按类型）
+MailingModuleDescContactsByCompanyCategory=第三方/患者的联络人（按类别）
+MailingModuleDescContactsByFunction=第三方/患者的联络人（按专科）
