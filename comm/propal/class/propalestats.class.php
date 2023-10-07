@@ -62,8 +62,6 @@ class PropaleStats extends Stats
 	 */
 	public function __construct($db, $socid = 0, $userid = 0, $mode = 'customer', $typentid = 0, $categid = 0)
 	{
-		global $user, $conf;
-
 		$this->db = $db;
 		$this->socid = ($socid > 0 ? $socid : 0);
 		$this->userid = $userid;
@@ -106,9 +104,7 @@ class PropaleStats extends Stats
 		}
 
 		if ($categid) {
-			$this->join .= ' LEFT JOIN '.MAIN_DB_PREFIX.'categorie_societe as cs ON cs.fk_soc = p.fk_soc';
-			$this->join .= ' LEFT JOIN '.MAIN_DB_PREFIX.'categorie as c ON c.rowid = cs.fk_categorie';
-			$this->where .= ' AND c.rowid = '.((int) $categid);
+			$this->where .= ' AND EXISTS (SELECT rowid FROM '.MAIN_DB_PREFIX.'categorie_societe as cats WHERE cats.fk_soc = p.fk_soc AND cats.fk_categorie = '.((int) $categid).')';
 		}
 	}
 
